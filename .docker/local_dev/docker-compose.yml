@@ -1,7 +1,9 @@
 version: '3'
 services:
   httpd:
-    build: .
+    build:
+      context: .
+      dockerfile: ./node-httpd.docker
     ports:
      - "1111:80"
      - "9229:9229"
@@ -9,3 +11,13 @@ services:
      - "9221:9221"
     volumes:
      - ../../:/code
+  database:
+      build:
+        context: ../../src/sql
+        dockerfile: ../../.docker/local_dev/postgres.docker
+      environment:
+        POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?You need to set the POSTGRES_PASSWORD environment variable}
+        POSTGRES_USER: "ccirelli2"
+        POSTGRES_DB: "test_database"
+      ports:
+       - "5432:5432"

@@ -1,0 +1,7 @@
+FROM postgres:alpine as Base
+
+LABEL auther="Stephen Cirelli"
+LABEL maintainer="stephen.cirelli@capitalone.com"
+LABEL description="Empty Postgres container for Scraper API development environment."
+
+COPY ./* /docker-entrypoint-initdb.d/
