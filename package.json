@@ -1,0 +1,37 @@
+{
+  "name": "scanner-api",
+  "version": "1.0.0",
+  "description": "API for Chris's Scanner Program",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:docker:dev": "npm run-script docker:start:dev",
+    "docker:start:dev": "pm2-docker start config/pm2/ecosystem.config.dev.yml --only Scraper-API",
+    "docker:start:docker-cmd": "npm run-script docker:start:dev",
+    "debug:chrome": "node --inspect-brk server.js",
+    "lint": "eslint . --fix --ext .js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pre-push-check": "./pre-push.sh",
+    "bump:major": "node tickVersion.js -M",
+    "bump:minor": "node tickVersion.js -m",
+    "bump:patch": "node tickVersion.js -p"
+  },
+  "keywords": [
+    "api",
+    "scanner"
+  ],
+  "author": "Steve Cirelli",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4",
+    "express-http-proxy": "^1.5.0",
+    "lodash": "^4.17.11",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.11.1"
+  }
+}

@@ -1,0 +1,6 @@
+apps:
+  - script: ./src/server.js
+    name: Scraper-API
+    watch: ./src
+    ignore_watch:
+      - node_modules
