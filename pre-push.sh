@@ -12,12 +12,15 @@ function header() {
 }
 
 header 'Running linter'
-npm run-script lint | grep "changed 0 files\.\.\.OK"
+npm run-script lint
+set +o errexit
+git status | grep "modified:"
 result=$?
+set -o errexit
 
-if [ "$result" -ne 0 ]; then
+if [ "$result" -eq 0 ]; then
     echo '#######################################################################################'
-    echo "'npm lint' changed files. Please review and commit these changes."
+    echo "'npm run lint' changed files. Please review and commit these changes."
     echo "If you do not want to keep these changes then check the original files back out."
     echo '#######################################################################################'
     echo
@@ -25,7 +28,7 @@ if [ "$result" -ne 0 ]; then
     git status
     echo
     echo
-    exit $result
+    exit 1
 fi
 
 header 'Running ''Unit Test'''
